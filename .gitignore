@@ -8,6 +8,9 @@
 #/ClientApp/app/*.js
 #/ClientApp/dist/**
 
+#exclude wwwroot
+src/BrewMgrCore/wwwroot/
+
 # database file
 src/BrewMgrCore/IngredientsData.sqlite
 

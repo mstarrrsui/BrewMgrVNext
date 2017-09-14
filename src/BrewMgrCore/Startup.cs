@@ -42,6 +42,19 @@ namespace BrewMgrCore
 
                 
             });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
+
+
+
             services.AddMvc();
 
             // Also make top level configuration available (for EF configuration and access to connection string)
@@ -63,6 +76,14 @@ namespace BrewMgrCore
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseDatabaseErrorPage();
+            app.UseStatusCodePages();
+
+            app.UseDefaultFiles(); // so index.html is not required
+            app.UseStaticFiles();
+
+
 
             app.UseMvc(routes =>
             {
