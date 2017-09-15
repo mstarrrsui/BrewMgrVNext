@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { Hop } from '../model/hop.model';
 
 import 'rxjs/add/operator/toPromise';
+import { AppConfiguration } from '../../common/appConfiguration';
 
 const API_LOCATION: string = '';
 
@@ -14,12 +15,12 @@ export class IngredientService {
 
     private _hopslist: Observable<Hop[]> = null;
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, private config: AppConfiguration) { }
 
     public getHops(): Observable<Hop[]> {
 
         if (!this._hopslist) {
-            this._hopslist = this.http.get('/api/hops')
+            this._hopslist = this.http.get(this.config.urls.url("hops"))
                 //.do( (list) => console.log(list))
                 .map((res: Response) => res.json() as Hop[])
                 .publishReplay(1).refCount()

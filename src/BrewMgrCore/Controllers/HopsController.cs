@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BrewMgrCore.Model;
 using BrewMgrCore.Utilities.ErrorHandling;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Logging;
 namespace BrewMgrCore.Controllers
 {
     [ServiceFilter(typeof(ApiExceptionFilter))]
+    [EnableCors("CorsPolicy")]
     public class HopsController : Controller
     {
 

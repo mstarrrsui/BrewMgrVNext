@@ -3,6 +3,7 @@ using BrewMgrCore.Model;
 using BrewMgrCore.Utilities.ErrorHandling;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -85,12 +86,21 @@ namespace BrewMgrCore
 
 
 
+            // put last so header configs like CORS or Cookies etc can fire
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+
+			// catch-all handler for HTML5 client routes - serve index.html
+	        app.Run(async context =>
+	        {
+		        context.Response.ContentType = "text/html";
+				await context.Response.SendFileAsync(Path.Combine(env.WebRootPath, "index.html"));
+	        });
 
 
         }

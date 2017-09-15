@@ -17,6 +17,7 @@ import { Error404Component } from './errors/404.component';
 import { HopDetailComponent } from './ingredients/hops-detail/hop-detail.component';
 import { ROUTES } from './routes'
 import { ToastrService } from './common/toastr.service';
+import { AppConfiguration } from './common/appConfiguration';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -37,7 +38,7 @@ import { ToastrService } from './common/toastr.service';
         FormsModule,
         RouterModule.forRoot(ROUTES, { enableTracing: true, useHash: true, preloadingStrategy: PreloadAllModules })
     ],
-    providers: [ IngredientService, ToastrService ]
+    providers: [ IngredientService, ToastrService, AppConfiguration ]
 })
 export class AppModule {
 }
