@@ -1,7 +1,10 @@
 <div>
-    <h1>Hops List</h1>
+    <h1>Hops</h1>
+    <h4>
+        <div *ngIf="(hopdata | async)?.length > 0">Total items: {{(hopdata | async)?.length}}</div>
+    </h4>
     <hr/>
-    <div *ngIf="(hopdata | async)?.length > 0">Number of items: {{(hopdata | async)?.length}}
+    <div *ngIf="(hopdata | async)?.length > 0">
         <div class="row">
             <div *ngFor="let h of hopdata | async" class="col-md-5">
                 <hops-item (itemClick)="handleItemClicked($event)" [hop]="h"></hops-item>

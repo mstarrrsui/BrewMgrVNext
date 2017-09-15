@@ -1,5 +1,23 @@
-.well div { color: #bbb; }
-.well button { margin-top: 10px; position:absolute; bottom:35px;  margin-bottom:7px; left: 35px;}
-.thumbnail { min-height: 410px; }
-.description { margin-bottom: 20px; }
-.value { font-weight: bold;}
+.well div {
+    color: #bbb;
+}
+
+.well button {
+    margin-top: 10px;
+    position: absolute;
+    bottom: 35px;
+    margin-bottom: 7px;
+    left: 35px;
+}
+
+.thumbnail {
+    min-height: 365px;
+}
+
+.description {
+    margin-bottom: 20px;
+}
+
+.value {
+    font-weight: bold;
+}
