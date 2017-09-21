@@ -16,28 +16,28 @@
         </div>
     </div>
 
-    <form>
+    <form [formGroup]="hopForm" (ngSubmit)="onFormSubmit(hopForm.value)">
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label for="hop.name">Name</label>
-                    <input [(ngModel)]="hop.name" name="hop.name" id="hop.name" type="text" class="form-control" placeholder="Name...">
+                    <label for="name">Name</label>
+                    <input formControlName="name" name="name" id="name" type="text" class="form-control" placeholder="Name...">
                 </div>
             </div>
         </div>
         <div class="form-group">
             <div class="row">
                 <div class="col-md-10">
-                    <label for="hop.description">Description</label>
-                    <textarea [(ngModel)]="hop.description" name="hop.description" id="hop.description" class="form-control" rows="5" placeholder="Description..."></textarea>
+                    <label for="description">Description</label>
+                    <textarea formControlName="description" name="description" id="description" class="form-control" rows="5" placeholder="Description..."></textarea>
                 </div>
             </div>
         </div>
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label for="hop.type">Type</label>
-                    <select [(ngModel)]="hop.type" name="hop.type" id="hop.type" class="form-control">
+                    <label for="type">Type</label>
+                    <select formControlName="type" name="type" id="type" class="form-control">
                       <option>Bittering</option>
                       <option>Aroma</option>
                       <option>Both</option>
@@ -48,8 +48,8 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label for="hop.countryOfOrigin">Country Of Origin</label>
-                    <input [(ngModel)]="hop.countryOfOrigin" name="hop.countryOfOrigin" id="hop.countryOfOrigin" type="text" class="form-control" placeholder="Origin...">
+                    <label for="countryOfOrigin">Country Of Origin</label>
+                    <input formControlName="countryOfOrigin" name="countryOfOrigin" id="countryOfOrigin" type="text" class="form-control" placeholder="Origin...">
                 </div>
             </div>
         </div>
@@ -57,19 +57,19 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label for="hop.useIn">Use In</label>
+                    <label for="useIn">Use In</label>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="radio-inline">
                         <label>
-                          <input [(ngModel)]="hop.useIn" type="radio" name="hop.useIn" id="hop.useIn1" value="Boil"> Boil
+                          <input formControlName="useIn" type="radio" name="useIn" id="hop.useIn1" value="Boil"> Boil
                        </label>
                     </div>
                     <div class="radio-inline">
                         <label>
-                          <input [(ngModel)]="hop.useIn" type="radio" name="hop.useIn" id="hop.useIn2" value="Both"> Both
+                          <input formControlName="useIn" type="radio" name="useIn" id="hop.useIn2" value="Both"> Both
                         </label>
                     </div>
                 </div>
@@ -78,9 +78,9 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label for="hop.betaAcid">Beta Acid Pct</label>
+                    <label for="betaAcid">Beta Acid Pct</label>
                     <div class="input-group" style="max-width:105px">
-                        <input [(ngModel)]="hop.betaAcid" name="hop.betaAcid" id="hop.betaAcid" type="text" class="form-control">
+                        <input formControlName="betaAcidPct" name="betaAcid" id="betaAcid" type="text" class="form-control">
                         <span class="input-group-addon">%</span>
                     </div>
                 </div>
@@ -89,9 +89,9 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label for="hop.alphaAcid">Alpha Acid Pct</label>
+                    <label for="alphaAcid">Alpha Acid Pct</label>
                     <div class="input-group" style="max-width:105px">
-                        <input [(ngModel)]="hop.alphaAcid" name="hop.alphaAcid" id="hop.alphaAcid" type="text" class="form-control">
+                        <input formControlName="alphaAcidPct" name="alphaAcid" id="alphaAcid" type="text" class="form-control">
                         <span class="input-group-addon">%</span>
                     </div>
                 </div>
