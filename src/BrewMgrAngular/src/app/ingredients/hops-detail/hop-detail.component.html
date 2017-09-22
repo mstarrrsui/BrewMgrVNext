@@ -2,21 +2,24 @@
 
     <div class="row">
         <div class="col-md-11">
-            <h2 class="text-primary">{{hop?.name}} </h2>
+            <h2 class="text-primary">{{name?.value}} </h2>
         </div>
 
     </div>
 
     <div class="row">
         <div class="col-md-6">
-            <div class="description">{{hop?.description}}</div>
-            <div><strong>Type:</strong> {{hop?.type}}</div>
-            <div><strong>Country of Origin:</strong> {{hop?.countryOfOrigin}}</div>
-            <div><strong>Use In:</strong>{{hop?.useIn}}</div>
+            <div class="description">{{description?.value}}</div>
+            <div><strong>Type:</strong> {{type?.value}}</div>
+            <div><strong>Country of Origin:</strong> {{countryOfOrigin?.value}}</div>
+            <div><strong>Use In:</strong> {{useIn?.value}}</div>
         </div>
     </div>
+    <div class="row">
+        <hr/> 
+    </div>
 
-    <form [formGroup]="hopForm" (ngSubmit)="onFormSubmit(hopForm.value)">
+    <form *ngIf="hop" [formGroup]="hopForm" (ngSubmit)="onFormSubmit(hopForm.value)">
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
@@ -79,7 +82,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="betaAcid">Beta Acid Pct</label>
-                    <div class="input-group" style="max-width:105px">
+                    <div class="input-group" style="max-width:112px">
                         <input formControlName="betaAcidPct" name="betaAcid" id="betaAcid" type="text" class="form-control">
                         <span class="input-group-addon">%</span>
                     </div>
@@ -90,7 +93,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="alphaAcid">Alpha Acid Pct</label>
-                    <div class="input-group" style="max-width:105px">
+                    <div class="input-group" style="max-width:112px">
                         <input formControlName="alphaAcidPct" name="alphaAcid" id="alphaAcid" type="text" class="form-control">
                         <span class="input-group-addon">%</span>
                     </div>

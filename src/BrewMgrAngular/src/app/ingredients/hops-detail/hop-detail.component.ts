@@ -47,6 +47,8 @@ export class HopDetailComponent implements OnInit {
 
   private setFormValues(h: Hop) {
 
+    this.hop = h;
+
     this.name = new FormControl(h.name,Validators.required);
     this.description = new FormControl(h.description,Validators.required);
     this.type = new FormControl(h.type,Validators.required);
