@@ -15,7 +15,7 @@ namespace BrewMgrCore.Model
             int id = postedHop.Id;
             Hop hop;
 
-            if (id < 1)
+            if (id < 0)
                 hop = Create();
             else
             {

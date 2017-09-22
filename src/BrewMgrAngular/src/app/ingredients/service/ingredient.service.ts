@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Hop } from '../model/hop.model';
 
@@ -41,6 +41,22 @@ export class IngredientService {
             .do( (list) => console.log(list))
             .map( hops => hops.find( (h) => h.id === id));
     }
+
+    public saveHop(hop: Hop): Observable<Hop> {
+        return this.http.post(this.config.urls.url("hop"),
+                              hop,
+                              new RequestOptions( {withCredentials:true}) )
+    
+           .map( response => {
+              let hop = response.json();
+    
+              // explicitly invalidate the old list
+              this._hopslist = null;
+    
+              return hop;
+            })
+          .catch( this.handleError );
+      }
     
     // private handleError(error: any): Promise<any> {
     //     console.error("An error occurred", error); // for demo purposes only

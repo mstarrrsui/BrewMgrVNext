@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap } from '@angular/router'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms'
 import { IngredientService } from '../service/ingredient.service';
 import { Hop } from '../model/hop.model';
 import { Observable } from 'rxjs/Rx';
@@ -31,10 +31,24 @@ export class HopDetailComponent implements OnInit {
   public betaAcidPct : FormControl;
   public alphaAcidPct : FormControl;
 
+  public readonly isNameValid = () => true;
 
-  constructor(private ingredientService: IngredientService, private route: ActivatedRoute) {
-
+  constructor(private fb: FormBuilder, private ingredientService: IngredientService, private route: ActivatedRoute) {
+    this.createForm();
   }
+
+  private createForm() {
+    this.hopForm = this.fb.group({
+      name: ['',[Validators.required,Validators.pattern('[a-zA-Z].*')]],
+      description: ['',Validators.required],
+      type: ['',Validators.required],
+      countryOfOrigin: ['',Validators.required],
+      useIn: ['',Validators.required],
+      betaAcid: ['',Validators.required],
+      alphaAcid: ['',Validators.required]
+    })
+  }
+
 
   public ngOnInit() {
 
@@ -48,27 +62,68 @@ export class HopDetailComponent implements OnInit {
   private setFormValues(h: Hop) {
 
     this.hop = h;
+    this.hopForm.setValue({
+      name: this.hop.name,
+      description: this.hop.description,
+      type: this.hop.type,
+      countryOfOrigin: this.hop.countryOfOrigin,
+      useIn: this.hop.useIn,
+      betaAcid: this.hop.betaAcid,
+      alphaAcid: this.hop.alphaAcid
+    })
 
-    this.name = new FormControl(h.name,Validators.required);
-    this.description = new FormControl(h.description,Validators.required);
-    this.type = new FormControl(h.type,Validators.required);
-    this.countryOfOrigin = new FormControl(h.countryOfOrigin,Validators.required);
-    this.useIn = new FormControl(h.useIn,Validators.required);
-    this.betaAcidPct = new FormControl(h.betaAcid,Validators.required);
-    this.alphaAcidPct = new FormControl(h.alphaAcid,Validators.required);
 
-    this.hopForm = new FormGroup({
-      name: this.name,
-      description: this.description,
-      type: this.type,
-      countryOfOrigin: this.countryOfOrigin,
-      useIn: this.useIn,
-      betaAcidPct: this.betaAcidPct,
-      alphaAcidPct: this.alphaAcidPct
-    });
   }
 
-  public onFormSubmit(formValues) {
-    console.log(formValues);
+  public onFormSubmit() {
+
+    console.log(this.hopForm.value);
+
+    this.hop = this.prepareSaveHop()
+
+    return this.ingredientService.saveHop(this.hop)
+      .subscribe((hop: Hop) => {
+          var msg = hop.name + " has been saved."
+          console.log(msg);
+          //this.error.info(msg);
+          //toastr.success(msg);
+          // window.document.getElementById("MainView").scrollTop = 0;
+
+          // setTimeout(function () {
+          //   this.router.navigate(["/album", album.Id]);
+          // }, 1500)
+      },
+      err => {
+        let msg = `Unable to save hop: ${err.message}`;
+        console.log(msg);
+        
+        // this.error.error(msg);
+        // toastr.error(msg);
+
+        // if (err.response && err.response.status == 401) {
+        //   this.user.isAuthenticated = false;
+        //   this.router.navigate(["login"]);
+        // }
+      });
   }
+
+  private prepareSaveHop(): Hop {
+
+    const formModel = this.hopForm.value;
+
+    const saveHop: Hop = {
+      id: this.hop.id,
+      name: formModel.name as string,
+      description: formModel.description as string,
+      type: formModel.type as string,
+      countryOfOrigin: formModel.countryOfOrigin as string,
+      useIn: formModel.useIn as string,
+      hsi: this.hop.hsi,
+      betaAcid: formModel.betaAcid as string,
+      alphaAcid: formModel.alphaAcid as string
+    };
+    return saveHop;  
+  }
+
+  
 }

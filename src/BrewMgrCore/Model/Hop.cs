@@ -2,8 +2,10 @@ namespace BrewMgrCore.Model
 {
     public class Hop
     {
-       
-        public int Id { get; set; }
+        public Hop() {
+            Id = -1;
+        }
+        public int Id {get; set;}
         public string Name { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }

@@ -1,29 +1,43 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-md-11">
-            <h2 class="text-primary">{{name?.value}} </h2>
+        <div *ngIf="hopForm.get('name').value.length > 0" class="col-md-11">
+            <h2 class="text-primary">{{hopForm.get('name').value}} </h2>
+        </div>
+        <div *ngIf="hopForm.get('name').value.length < 1" class="col-md-11">
+            <h2 class="text-primary">-UNSPECIFIED-</h2>
         </div>
 
     </div>
 
     <div class="row">
         <div class="col-md-6">
-            <div class="description">{{description?.value}}</div>
-            <div><strong>Type:</strong> {{type?.value}}</div>
-            <div><strong>Country of Origin:</strong> {{countryOfOrigin?.value}}</div>
-            <div><strong>Use In:</strong> {{useIn?.value}}</div>
+            <div class="description">{{hopForm.get('description').value}}</div>
+            <div><strong>Type:</strong> {{hopForm.get('type').value}}</div>
+            <div><strong>Country of Origin:</strong> {{hopForm.get('countryOfOrigin').value}}</div>
+            <div><strong>Use In:</strong> {{hopForm.get('useIn').value}}</div>
         </div>
     </div>
+
     <div class="row">
         <hr/> 
     </div>
 
-    <form *ngIf="hop" [formGroup]="hopForm" (ngSubmit)="onFormSubmit(hopForm.value)">
-        <div class="form-group">
+    <div class="row">
+        <p>Form value: {{ hopForm?.value | json }}</p> 
+    </div>
+
+    <div class="row">
+        <hr/> 
+    </div>
+
+    <form *ngIf="hop" [formGroup]="hopForm" (ngSubmit)="onFormSubmit()">
+        <div class="form-group" [ngClass]="{'error' : !isNameValid() }">
             <div class="row">
                 <div class="col-md-6">
                     <label for="name">Name</label>
+                    <em *ngIf="!isNameValid() && hopForm.controls.name.errors.required">Required</em>
+                    <em *ngIf="!isNameValid() && hopForm.controls.name.errors.pattern">Must start with a letter</em>
                     <input formControlName="name" name="name" id="name" type="text" class="form-control" placeholder="Name...">
                 </div>
             </div>
@@ -83,7 +97,7 @@
                 <div class="col-md-6">
                     <label for="betaAcid">Beta Acid Pct</label>
                     <div class="input-group" style="max-width:112px">
-                        <input formControlName="betaAcidPct" name="betaAcid" id="betaAcid" type="text" class="form-control">
+                        <input formControlName="betaAcid" name="betaAcid" id="betaAcid" type="text" class="form-control">
                         <span class="input-group-addon">%</span>
                     </div>
                 </div>
@@ -94,7 +108,7 @@
                 <div class="col-md-6">
                     <label for="alphaAcid">Alpha Acid Pct</label>
                     <div class="input-group" style="max-width:112px">
-                        <input formControlName="alphaAcidPct" name="alphaAcid" id="alphaAcid" type="text" class="form-control">
+                        <input formControlName="alphaAcid" name="alphaAcid" id="alphaAcid" type="text" class="form-control">
                         <span class="input-group-addon">%</span>
                     </div>
                 </div>
