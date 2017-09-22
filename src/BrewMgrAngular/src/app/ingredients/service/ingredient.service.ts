@@ -40,7 +40,8 @@ export class IngredientService {
     public getHop(id: number): Observable<Hop> {
         return this.getHops()
             .do( (list) => console.log(list))
-            .map( hops => hops.find( (h) => h.id === id));
+            .map( hops => hops.find( (h) => h.id === id))
+            .catch( new ErrorInfo().parseObservableResponseError )
     }
 
     public saveHop(hop: Hop): Observable<Hop> {

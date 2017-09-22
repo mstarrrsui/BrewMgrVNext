@@ -19,19 +19,30 @@
         </div>
     </div>
 
-    <div class="row">
-        <hr/> 
-    </div>
-
-    <div class="row">
-        <p>Form value: {{ hopForm?.value | json }}</p> 
-    </div>
-
-    <div class="row">
-        <hr/> 
-    </div>
+    
 
     <form *ngIf="hop" [formGroup]="hopForm" (ngSubmit)="onFormSubmit()">
+
+            <div class="row">
+                    <hr/> 
+                </div>
+            
+                <div class="row">
+                    <div class="col-md-2">
+                        <p>form.valid: <strong>{{ hopForm?.valid}}</strong></p> 
+                        <p>form.invalid: <strong>{{ hopForm?.invalid}}</strong></p> 
+                        <p>form.dirty: <strong>{{ hopForm?.dirty}}</strong></p> 
+                        <p>form.pristine: <strong>{{ hopForm?.pristine}}</strong></p> 
+                        <p>form.touched: <strong>{{ hopForm?.touched}}</strong></p> 
+                        <p>form.untouched: <strong>{{ hopForm?.untouched}}</strong></p> 
+                    </div>
+                   
+                </div>
+            
+                <div class="row">
+                    <hr/> 
+                </div>
+
         <div class="form-group" [ngClass]="{'error' : !isNameValid() }">
             <div class="row">
                 <div class="col-md-6">
@@ -116,7 +127,8 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" [disabled]="hopForm.pristine" class="btn btn-default">Submit</button>
+                <button type="reset" [disabled]="hopForm.pristine" (click)="onFormRevert()" class="btn btn-danger">Revert</button>
             </div>
         </div>
 

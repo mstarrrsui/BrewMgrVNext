@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute, ParamMap } from '@angular/router'
+import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms'
 import { IngredientService } from '../service/ingredient.service';
 import { Hop } from '../model/hop.model';
@@ -34,7 +34,12 @@ export class HopDetailComponent implements OnInit {
 
   public readonly isNameValid = () => true;
 
-  constructor(private fb: FormBuilder, private toastr: ToastrService,  private ingredientService: IngredientService, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, 
+              private toastr: ToastrService,  
+              private router: Router, 
+              private ingredientService: IngredientService, 
+              private route: ActivatedRoute)  {
+
     this.createForm();
   }
 
@@ -63,7 +68,7 @@ export class HopDetailComponent implements OnInit {
   private setFormValues(h: Hop) {
 
     this.hop = h;
-    this.hopForm.setValue({
+    this.hopForm.reset({
       name: this.hop.name,
       description: this.hop.description,
       type: this.hop.type,
@@ -85,14 +90,15 @@ export class HopDetailComponent implements OnInit {
     return this.ingredientService.saveHop(this.hop)
       .subscribe((hop: Hop) => {
           var msg = hop.name + " has been saved."
+          const myrouter = this.router;
           console.log(msg);
           //this.error.info(msg);
           this.toastr.success(msg);
           // window.document.getElementById("MainView").scrollTop = 0;
-
-          // setTimeout(function () {
-          //   this.router.navigate(["/album", album.Id]);
-          // }, 1500)
+          setTimeout(function () {
+            myrouter.navigate(["/hops"]);
+          this.setFormValues(hop);
+          }, 1500)
       },
       err => {
         let msg = `Unable to save hop: ${err.message}`;
@@ -106,6 +112,10 @@ export class HopDetailComponent implements OnInit {
         //   this.router.navigate(["login"]);
         // }
       });
+  }
+
+  public onFormRevert() {
+    this.setFormValues(this.hop)
   }
 
   private prepareSaveHop(): Hop {

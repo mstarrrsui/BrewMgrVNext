@@ -39,7 +39,7 @@ import { AppConfiguration } from './common/appConfiguration';
         ReactiveFormsModule,
         RouterModule.forRoot(ROUTES, { enableTracing: true, useHash: true, preloadingStrategy: PreloadAllModules })
     ],
-    providers: [ IngredientService, ToastrService, AppConfiguration ]
+    providers: [ IngredientService, ToastrService, AppConfiguration]
 })
 export class AppModule {
 }
