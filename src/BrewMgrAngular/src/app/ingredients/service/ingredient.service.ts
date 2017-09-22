@@ -5,6 +5,7 @@ import { Hop } from '../model/hop.model';
 
 import 'rxjs/add/operator/toPromise';
 import { AppConfiguration } from '../../common/appConfiguration';
+import { ErrorInfo } from '../../common/errorDisplay';
 
 const API_LOCATION: string = '';
 
@@ -24,17 +25,17 @@ export class IngredientService {
                 //.do( (list) => console.log(list))
                 .map((res: Response) => res.json() as Hop[])
                 .publishReplay(1).refCount()
-                .catch(this.handleError);
+                .catch(new ErrorInfo().parseObservableResponseError);
         }
         return this._hopslist;
     }
 
-    public getHops2(onNext: (hopslist: Hop[]) => void): void {
-        this.http.get(API_LOCATION + '/api/hops')
-            .do( (list) => console.log(list))
-            .map((res: Response) => res.json() as Hop[])
-            .subscribe(onNext, this.handleError);
-    }
+    // public getHops2(onNext: (hopslist: Hop[]) => void): void {
+    //     this.http.get(API_LOCATION + '/api/hops')
+    //         .do( (list) => console.log(list))
+    //         .map((res: Response) => res.json() as Hop[])
+    //         .subscribe(onNext, this.handleError);
+    // }
 
     public getHop(id: number): Observable<Hop> {
         return this.getHops()
@@ -55,7 +56,7 @@ export class IngredientService {
     
               return hop;
             })
-          .catch( this.handleError );
+          .catch( new ErrorInfo().parseObservableResponseError );
       }
     
     // private handleError(error: any): Promise<any> {
@@ -63,9 +64,11 @@ export class IngredientService {
     //     return Promise.reject(error.message || error);
     // }
 
-    public handleError(error: Response) {
-        console.error(error);
-        return Observable.throw(error || 'Server error');
-    }
+    // public handleError(error: Response) {
+    //     console.error(error);
+    //     return Observable.throw(error || 'Server error');
+    // }
+
+    
 
 }

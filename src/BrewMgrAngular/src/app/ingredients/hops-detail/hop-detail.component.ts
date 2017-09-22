@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms'
 import { IngredientService } from '../service/ingredient.service';
 import { Hop } from '../model/hop.model';
 import { Observable } from 'rxjs/Rx';
+import { ToastrService } from '../../common/toastr.service';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class HopDetailComponent implements OnInit {
 
   public readonly isNameValid = () => true;
 
-  constructor(private fb: FormBuilder, private ingredientService: IngredientService, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private toastr: ToastrService,  private ingredientService: IngredientService, private route: ActivatedRoute) {
     this.createForm();
   }
 
@@ -86,7 +87,7 @@ export class HopDetailComponent implements OnInit {
           var msg = hop.name + " has been saved."
           console.log(msg);
           //this.error.info(msg);
-          //toastr.success(msg);
+          this.toastr.success(msg);
           // window.document.getElementById("MainView").scrollTop = 0;
 
           // setTimeout(function () {
@@ -98,7 +99,7 @@ export class HopDetailComponent implements OnInit {
         console.log(msg);
         
         // this.error.error(msg);
-        // toastr.error(msg);
+        this.toastr.error(msg);
 
         // if (err.response && err.response.status == 401) {
         //   this.user.isAuthenticated = false;
