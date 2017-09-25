@@ -22,15 +22,7 @@ import { ToastrService } from '../../common/toastr.service';
 export class HopDetailComponent implements OnInit {
 
   public hop: Hop;
-
   public hopForm : FormGroup;
-  public name : FormControl;
-  public description : FormControl;
-  public type : FormControl;
-  public countryOfOrigin : FormControl;
-  public useIn : FormControl;
-  public betaAcidPct : FormControl;
-  public alphaAcidPct : FormControl;
 
   public readonly isNameValid = () => true;
 
@@ -58,10 +50,12 @@ export class HopDetailComponent implements OnInit {
 
   public ngOnInit() {
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) =>
-        this.ingredientService.getHop(+params.get('id')))
-      .subscribe((h: Hop) => this.setFormValues(h));
+    // this.route.paramMap
+    //   .switchMap((params: ParamMap) =>
+    //     this.ingredientService.getHop(+params.get('id')))
+    //   .subscribe((h: Hop) => this.setFormValues(h));
+
+      this.setFormValues( this.route.snapshot.data['hop'] );
 
   }
 

@@ -19,120 +19,114 @@
         </div>
     </div>
 
-    
+    <div class="row">
+        <hr/>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <form *ngIf="hop" [formGroup]="hopForm" (ngSubmit)="onFormSubmit()">
 
-    <form *ngIf="hop" [formGroup]="hopForm" (ngSubmit)="onFormSubmit()">
-
-            <div class="row">
-                    <hr/> 
-                </div>
-            
-                <div class="row">
-                    <div class="col-md-2">
-                        <p>form.valid: <strong>{{ hopForm?.valid}}</strong></p> 
-                        <p>form.invalid: <strong>{{ hopForm?.invalid}}</strong></p> 
-                        <p>form.dirty: <strong>{{ hopForm?.dirty}}</strong></p> 
-                        <p>form.pristine: <strong>{{ hopForm?.pristine}}</strong></p> 
-                        <p>form.touched: <strong>{{ hopForm?.touched}}</strong></p> 
-                        <p>form.untouched: <strong>{{ hopForm?.untouched}}</strong></p> 
+                <div class="form-group" [ngClass]="{'error' : !isNameValid() }">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="name">Name</label>
+                            <em *ngIf="!isNameValid() && hopForm.controls.name.errors.required">Required</em>
+                            <em *ngIf="!isNameValid() && hopForm.controls.name.errors.pattern">Must start with a letter</em>
+                            <input formControlName="name" name="name" id="name" type="text" class="form-control" placeholder="Name...">
+                        </div>
                     </div>
-                   
                 </div>
-            
-                <div class="row">
-                    <hr/> 
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <label for="description">Description</label>
+                            <textarea formControlName="description" name="description" id="description" class="form-control" rows="5" placeholder="Description..."></textarea>
+                        </div>
+                    </div>
                 </div>
-
-        <div class="form-group" [ngClass]="{'error' : !isNameValid() }">
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="name">Name</label>
-                    <em *ngIf="!isNameValid() && hopForm.controls.name.errors.required">Required</em>
-                    <em *ngIf="!isNameValid() && hopForm.controls.name.errors.pattern">Must start with a letter</em>
-                    <input formControlName="name" name="name" id="name" type="text" class="form-control" placeholder="Name...">
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-10">
-                    <label for="description">Description</label>
-                    <textarea formControlName="description" name="description" id="description" class="form-control" rows="5" placeholder="Description..."></textarea>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="type">Type</label>
-                    <select formControlName="type" name="type" id="type" class="form-control">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="type">Type</label>
+                            <select formControlName="type" name="type" id="type" class="form-control">
                       <option>Bittering</option>
                       <option>Aroma</option>
                       <option>Both</option>
                     </select>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="countryOfOrigin">Country Of Origin</label>
-                    <input formControlName="countryOfOrigin" name="countryOfOrigin" id="countryOfOrigin" type="text" class="form-control" placeholder="Origin...">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="countryOfOrigin">Country Of Origin</label>
+                            <input formControlName="countryOfOrigin" name="countryOfOrigin" id="countryOfOrigin" type="text" class="form-control" placeholder="Origin...">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <!-- Use In -->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="useIn">Use In</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="radio-inline">
-                        <label>
+                <!-- Use In -->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="useIn">Use In</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="radio-inline">
+                                <label>
                           <input formControlName="useIn" type="radio" name="useIn" id="hop.useIn1" value="Boil"> Boil
                        </label>
-                    </div>
-                    <div class="radio-inline">
-                        <label>
+                            </div>
+                            <div class="radio-inline">
+                                <label>
                           <input formControlName="useIn" type="radio" name="useIn" id="hop.useIn2" value="Both"> Both
                         </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="betaAcid">Beta Acid Pct</label>
-                    <div class="input-group" style="max-width:112px">
-                        <input formControlName="betaAcid" name="betaAcid" id="betaAcid" type="text" class="form-control">
-                        <span class="input-group-addon">%</span>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="betaAcid">Beta Acid Pct</label>
+                            <div class="input-group" style="max-width:112px">
+                                <input formControlName="betaAcid" name="betaAcid" id="betaAcid" type="text" class="form-control">
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="alphaAcid">Alpha Acid Pct</label>
-                    <div class="input-group" style="max-width:112px">
-                        <input formControlName="alphaAcid" name="alphaAcid" id="alphaAcid" type="text" class="form-control">
-                        <span class="input-group-addon">%</span>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="alphaAcid">Alpha Acid Pct</label>
+                            <div class="input-group" style="max-width:112px">
+                                <input formControlName="alphaAcid" name="alphaAcid" id="alphaAcid" type="text" class="form-control">
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="submit" [disabled]="hopForm.pristine" class="btn btn-default">Submit</button>
+                        <button type="button" (click)="onFormCancel()" class="btn btn-warning">Cancel</button>
+                        <button type="button" [disabled]="hopForm.pristine" (click)="onFormRevert()" class="btn btn-danger">Revert</button>
+                    </div>
+                </div>
+
+            </form>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <button type="submit" [disabled]="hopForm.pristine" class="btn btn-default">Submit</button>
-                <button type="button" (click)="onFormCancel()" class="btn btn-warning">Cancel</button>
-                <button type="button" [disabled]="hopForm.pristine" (click)="onFormRevert()" class="btn btn-danger">Revert</button>
-            </div>
+        <div class="col-md-3 align-top">
+            <p>form.valid: <strong>{{ hopForm?.valid}}</strong></p>
+            <p>form.invalid: <strong>{{ hopForm?.invalid}}</strong></p>
+            <p>form.dirty: <strong>{{ hopForm?.dirty}}</strong></p>
+            <p>form.pristine: <strong>{{ hopForm?.pristine}}</strong></p>
+            <p>form.touched: <strong>{{ hopForm?.touched}}</strong></p>
+            <p>form.untouched: <strong>{{ hopForm?.untouched}}</strong></p>
         </div>
 
-    </form>
+    </div>
 
 </div>

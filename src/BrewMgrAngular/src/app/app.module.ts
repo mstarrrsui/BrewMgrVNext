@@ -18,6 +18,7 @@ import { HopDetailComponent } from './ingredients/hops-detail/hop-detail.compone
 import { ROUTES } from './routes'
 import { ToastrService } from './common/toastr.service';
 import { AppConfiguration } from './common/appConfiguration';
+import { HopResolver } from './ingredients/hops-detail/hop-detail.resolver';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -37,9 +38,14 @@ import { AppConfiguration } from './common/appConfiguration';
         HttpModule,
         FormsModule,
         ReactiveFormsModule,
-        RouterModule.forRoot(ROUTES, { enableTracing: true, useHash: true, preloadingStrategy: PreloadAllModules })
+        RouterModule.forRoot(ROUTES, { enableTracing: true,useHash: true, preloadingStrategy: PreloadAllModules })
     ],
-    providers: [ IngredientService, ToastrService, AppConfiguration]
+    providers: [ 
+        HopResolver,        
+        IngredientService, 
+        ToastrService, 
+        AppConfiguration 
+    ]
 })
 export class AppModule {
 }
