@@ -97,7 +97,6 @@ export class HopDetailComponent implements OnInit {
           // window.document.getElementById("MainView").scrollTop = 0;
           setTimeout(function () {
             myrouter.navigate(["/hops"]);
-          this.setFormValues(hop);
           }, 1500)
       },
       err => {
@@ -117,6 +116,15 @@ export class HopDetailComponent implements OnInit {
   public onFormRevert() {
     this.setFormValues(this.hop)
   }
+
+  public onFormCancel() {
+    const myrouter = this.router;
+    this.toastr.info("Cancelled");
+    setTimeout(function () {
+      myrouter.navigate(["/hops"]);
+    }, 800)
+  }
+
 
   private prepareSaveHop(): Hop {
 

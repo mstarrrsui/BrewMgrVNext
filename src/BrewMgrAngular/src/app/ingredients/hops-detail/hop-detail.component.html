@@ -128,7 +128,8 @@
         <div class="row">
             <div class="col-md-6">
                 <button type="submit" [disabled]="hopForm.pristine" class="btn btn-default">Submit</button>
-                <button type="reset" [disabled]="hopForm.pristine" (click)="onFormRevert()" class="btn btn-danger">Revert</button>
+                <button type="button" (click)="onFormCancel()" class="btn btn-warning">Cancel</button>
+                <button type="button" [disabled]="hopForm.pristine" (click)="onFormRevert()" class="btn btn-danger">Revert</button>
             </div>
         </div>
 
