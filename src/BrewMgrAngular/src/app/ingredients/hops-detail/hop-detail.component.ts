@@ -54,9 +54,7 @@ export class HopDetailComponent implements OnInit {
     //   .switchMap((params: ParamMap) =>
     //     this.ingredientService.getHop(+params.get('id')))
     //   .subscribe((h: Hop) => this.setFormValues(h));
-
-      this.setFormValues( this.route.snapshot.data['hop'] );
-
+    this.route.data.subscribe((data) => this.setFormValues(data['hop']));
   }
 
   private setFormValues(h: Hop) {
