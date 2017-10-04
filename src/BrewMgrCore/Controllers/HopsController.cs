@@ -44,6 +44,15 @@ namespace BrewMgrCore.Controllers
             
         }
 
+        [HttpGet("api/hop/search/{name}")]
+        public async Task<List<Hop>> SearchHops(string name)
+        {
+            _logger.LogInformation($"SEARCHING HOP NAME {name}");
+
+            return await _hopRepo.HopLookup(name);
+            
+        }
+
         [HttpPost("api/hop")]
         public async Task<Hop> SaveHop([FromBody] Hop postedHop)
         {

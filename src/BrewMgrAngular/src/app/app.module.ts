@@ -19,6 +19,8 @@ import { ROUTES } from './routes'
 import { ToastrService } from './common/toastr.service';
 import { AppConfiguration } from './common/appConfiguration';
 import { HopResolver } from './ingredients/hops-detail/hop-detail.resolver';
+import { HopsSearchComponent } from './ingredients/hop-search/hops-search.component';
+import { HopsSearchContainer } from './ingredients/hop-search/hops-search.container';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -30,6 +32,8 @@ import { HopResolver } from './ingredients/hops-detail/hop-detail.resolver';
         HopsListComponent,
         HopsItemComponent,
         HopDetailComponent,
+        HopsSearchComponent,
+        HopsSearchContainer,
         HomeComponent,
         Error404Component
         ],

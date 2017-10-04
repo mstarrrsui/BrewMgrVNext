@@ -1,0 +1,19 @@
+<div class="container">
+
+
+    <form [formGroup]="form">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="name">Hop Name</label>
+                    <input formControlName="name" name="name" id="name" type="text" class="form-control" placeholder="Name...">
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <ul>
+        <li *ngFor="let h of hops">{{ h.name }}</li>
+    </ul>
+
+</div>

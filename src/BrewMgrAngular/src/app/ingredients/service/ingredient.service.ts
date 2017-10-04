@@ -44,6 +44,14 @@ export class IngredientService {
             .catch( new ErrorInfo().parseObservableResponseError )
     }
 
+    public searchHops(name: string): Observable<Hop[]> {
+        return  this.http.get(this.config.urls.url("searchhops",name))
+        //.do( (list) => console.log(list))
+        .map((res: Response) => res.json() as Hop[])
+        .publishReplay(1).refCount()
+        .catch(new ErrorInfo().parseObservableResponseError);
+    }
+
     public saveHop(hop: Hop): Observable<Hop> {
         return this.http.post(this.config.urls.url("hop"),
                               hop,

@@ -26,6 +26,7 @@ export class AppConfiguration {
         baseUrl: "./",
         hops: "api/hops",
         hop: "api/hop",
+        searchhops: "api/hop/search",
         url: (name,parm1?,parm2?,parm3?) => {
           var url = this.urls.baseUrl + this.urls[name];
           if (parm1)

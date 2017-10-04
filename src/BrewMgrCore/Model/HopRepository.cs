@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using BrewMgrCore.Utilities;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,6 +34,23 @@ namespace BrewMgrCore.Model
 
             return hop;
         }
+
+    /// <summary>
+    /// Hop look up by name - used for auto-complete box returns
+    /// </summary>
+    /// <param name="search"></param>
+    /// <returns></returns>
+    public async Task<List<Hop>> HopLookup(string search = null)
+    {
+        if (string.IsNullOrEmpty(search))
+            return new List<Hop>();
+
+
+        var term = search.ToLower();
+        return await Context.Hops
+            .Where(h => h.Name.ToLower().StartsWith(term))
+            .ToListAsync();
+    }
 
         public async Task<bool> DeleteHop(int id)
         {
