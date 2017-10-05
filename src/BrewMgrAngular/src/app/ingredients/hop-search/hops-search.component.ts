@@ -28,7 +28,7 @@ export class HopsSearchComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     this._subscription = this.form.valueChanges
       .do( (values) => console.log(values))
-      .map(values => values.name)
+      .map(values => values.name) //flatten down to the entered string
       .subscribe(this.observer);
   }
 }

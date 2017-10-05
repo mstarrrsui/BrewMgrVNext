@@ -10,21 +10,20 @@ import { Hop } from "../model/hop.model";
     selector: "hops-search-container",
     template: `
       <hops-search
-        [observer]="containerobserver"
+        [observer]="containersubject"
         [hops]="containerhops | async">
       </hops-search>
     `
   })
   export class HopsSearchContainer {
   
-    public containerobserver: PartialObserver<string>;
     public containerhops: Observable<Hop[]>;
-    private _subject: Subject<string>;
+    public containersubject: Subject<string>;
   
     constructor(private service: IngredientService) {
-      this._subject = new Subject<string>();
-      this.containerobserver = this._subject;
-      this.containerhops = this._subject
+      this.containersubject = new Subject<string>();
+      //this.containerobserver = this._subject;
+      this.containerhops = this.containersubject
         .debounceTime(400)
         .distinctUntilChanged()
         .switchMap(username => this.service.searchHops(username));
