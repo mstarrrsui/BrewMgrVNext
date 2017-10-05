@@ -45,11 +45,15 @@ export class IngredientService {
     }
 
     public searchHops(name: string): Observable<Hop[]> {
-        return  this.http.get(this.config.urls.url("searchhops",name))
-        //.do( (list) => console.log(list))
-        .map((res: Response) => res.json() as Hop[])
-        .publishReplay(1).refCount()
-        .catch(new ErrorInfo().parseObservableResponseError);
+        
+        return  name.length > 0 ? 
+            this.http.get(this.config.urls.url("searchhops",name))
+            //.do( (list) => console.log(list))
+            .map((res: Response) => res.json() as Hop[])
+            .publishReplay(1).refCount()
+            .catch(new ErrorInfo().parseObservableResponseError)
+        :
+            Observable.of<Hop[]>([]);
     }
 
     public saveHop(hop: Hop): Observable<Hop> {
