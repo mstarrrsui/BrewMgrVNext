@@ -1,0 +1,1 @@
+webpack --profile --json | Out-file 'stats.json' -Encoding OEM
