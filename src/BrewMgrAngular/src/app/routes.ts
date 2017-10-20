@@ -1,13 +1,19 @@
 ﻿import { Routes } from '@angular/router';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetchdata/fetchdata.component';
-import { HopsListComponent } from './ingredients/hops-list.component';
 import { HomeComponent } from './home/home.component';
 import { Error404Component } from './errors/404.component';
-import { HopDetailComponent } from "./ingredients/hops-detail/hop-detail.component";
-import { HopResolver } from './ingredients/hops-detail/hop-detail.resolver';
-import { HopsSearchComponent } from './ingredients/hop-search/hops-search.component';
-import { HopsSearchContainer } from './ingredients/hop-search/hops-search.container';
+
+import {
+    HopsListComponent,
+    HopsItemComponent,
+    IngredientService,
+    HopResolver,
+    HopsSearchComponent,
+    HopsSearchContainer,
+    HopDetailComponent
+} from './ingredients/index'
+
 
 export const ROUTES: Routes = [
     { path: '404', component: Error404Component },
