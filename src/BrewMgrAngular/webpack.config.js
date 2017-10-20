@@ -503,6 +503,19 @@ module.exports = {
     },
     "devServer": {
         "open": true,
+        "stats": {
+            colors: true,
+            hash: true,
+            timings: true,
+            chunks: true,
+            chunkModules: false,
+            children: false,
+            modules: false,
+            reasons: false,
+            warnings: true,
+            assets: false,
+            version: false
+        },
         "historyApiFallback": true
     }
 };
