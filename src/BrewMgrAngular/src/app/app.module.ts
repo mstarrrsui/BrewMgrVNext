@@ -9,18 +9,21 @@ import { AppComponent } from './app/app.component';
 import { NavBarComponent } from './navbar/navbar.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetchdata/fetchdata.component';
-import { HopsListComponent } from './ingredients/hops-list.component';
-import { HopsItemComponent } from './ingredients/hops-item.component';
 import { HomeComponent } from './home/home.component';
-import { IngredientService } from './ingredients/service/ingredient.service';
 import { Error404Component } from './errors/404.component';
-import { HopDetailComponent } from './ingredients/hops-detail/hop-detail.component';
 import { ROUTES } from './routes'
 import { ToastrService } from './common/toastr.service';
 import { AppConfiguration } from './common/appConfiguration';
-import { HopResolver } from './ingredients/hops-detail/hop-detail.resolver';
-import { HopsSearchComponent } from './ingredients/hop-search/hops-search.component';
-import { HopsSearchContainer } from './ingredients/hop-search/hops-search.container';
+
+import {
+    HopsListComponent,
+    HopsItemComponent,
+    IngredientService,
+    HopResolver,
+    HopsSearchComponent,
+    HopsSearchContainer,
+    HopDetailComponent
+} from './ingredients/index'
 
 @NgModule({
     bootstrap: [ AppComponent ],
