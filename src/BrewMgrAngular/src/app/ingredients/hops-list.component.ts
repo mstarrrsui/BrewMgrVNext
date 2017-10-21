@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Hop } from './model/hop.model';
 import { IngredientService } from './service/ingredient.service';
-import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs/Observable';
 // import { ToastrService } from "../common/toastr.service";
 
 @Component({

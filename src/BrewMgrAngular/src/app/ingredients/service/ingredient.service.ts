@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { Hop } from '../model/hop.model';
 
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/publishReplay';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/of';
+
 import { AppConfiguration } from '../../common/appConfiguration';
 import { ErrorInfo } from '../../common/errorDisplay';
 
@@ -22,7 +28,7 @@ export class IngredientService {
 
         if (!this._hopslist) {
             this._hopslist = this.http.get(this.config.urls.url("hops"))
-                //.do( (list) => console.log(list))
+                // .do( (list) => console.log(list))
                 .map((res: Response) => res.json() as Hop[])
                 .publishReplay(1).refCount()
                 .catch(new ErrorInfo().parseObservableResponseError);
@@ -48,7 +54,7 @@ export class IngredientService {
         
         return  name.length > 0 ? 
             this.http.get(this.config.urls.url("searchhops",name))
-            //.do( (list) => console.log(list))
+            // .do( (list) => console.log(list))
             .map((res: Response) => res.json() as Hop[])
             .publishReplay(1).refCount()
             .catch(new ErrorInfo().parseObservableResponseError)

@@ -1,14 +1,14 @@
 import {Component, OnInit, Input } from '@angular/core';
-import { Response} from "@angular/http";
-import {Observable} from "rxjs";
+import { Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 
 /**
  *   A Bootstrap based alert display
  */
 @Component({
-    //moduleId: module.id,
+    // moduleId: module.id,
     selector: 'error-display',
-    //templateUrl: 'errorDisplay.html'
+    // templateUrl: 'errorDisplay.html'
     template:  `
 <div *ngIf="error.message"
      class="alert alert-{{error.icon}} alert-dismissable">

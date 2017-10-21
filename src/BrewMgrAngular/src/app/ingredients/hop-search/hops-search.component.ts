@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from "@angular/core";
-import { PartialObserver } from "rxjs/Observer";
-import { Hop } from "../model/hop.model";
-import { FormGroup, FormBuilder } from "@angular/forms";
-import { Subscription } from "rxjs";
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Hop } from '../model/hop.model';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
+import { PartialObserver } from 'rxjs/Observer';
+
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: "hops-search",
+    selector: 'hops-search',
     templateUrl: './hops-search.component.html'
 })
 export class HopsSearchComponent implements OnDestroy, OnInit {
@@ -28,7 +29,7 @@ export class HopsSearchComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     this._subscription = this.form.valueChanges
       .do( (values) => console.log(values))
-      .map(values => values.name) //flatten down to the entered string
+      .map(values => values.name) // flatten down to the entered string
       .subscribe(this.observer);
   }
 }
